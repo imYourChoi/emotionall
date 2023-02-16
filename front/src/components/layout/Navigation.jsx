@@ -10,12 +10,14 @@ const pages = [
 
 const Navigation = () => {
   const router = useRouter();
-  if (router.pathname === "/chat") return <></>;
+  if (router.pathname === "/chat/[id]") return <></>;
   return (
     <div className="fixed bottom-0 inset-x-0 h-[60px] z-10">
       <div className="max-w-[430px] w-full h-full mx-auto flex items-center justify-between px-12 bg-white">
         {pages.map((page) => (
-          <Link href={`/${page.path}`}>{page.text}</Link>
+          <Link href={page.path} key={page.text}>
+            {page.text}
+          </Link>
         ))}
       </div>
     </div>
