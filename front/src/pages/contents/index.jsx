@@ -1,3 +1,3 @@
 export default function Contents() {
-  return <div>contents</div>;
+  return <div>Contents</div>;
 }

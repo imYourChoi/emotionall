@@ -1,3 +1,3 @@
 export default function index() {
-  return <div>settings</div>;
+  return <div>Settings</div>;
 }
