@@ -30,7 +30,7 @@ const Chatting = () => {
   };
 
   return (
-    <div className="max-w-[430px] w-full mx-auto h-screen flex flex-col overflow-scroll relative border-2">
+    <div className="max-w-[430px] w-full mx-auto h-screen flex flex-col overflow-scroll relative shadow-[0_0_1px_black]">
       <div className="mb-2">Chatting</div>
       <div>
         {chats?.map((chat, idx) => (
@@ -42,7 +42,7 @@ const Chatting = () => {
           ref={textAreaRef}
           onChange={handleChangeMessage}
           value={message}
-          className="resize-none border-2 h-[53px] outline-none px-4 py-[14.5px] flex-1"
+          className="resize-none text-sm h-[46px] outline-none px-4 py-[14.5px] flex-1 shadow-[0_0_1px_black]"
         ></textarea>
         <button
           className="px-4 py-2 h-fit text-sm font-bold text-white bg-positive rounded-full"
