@@ -30,7 +30,7 @@ const Chatting = () => {
   };
 
   return (
-    <div className="max-w-[430px] w-full mx-auto h-full flex flex-col overflow-scroll relative shadow-[0_0_1px_black]">
+    <div className="h-full flex flex-col overflow-scroll relative">
       <div className="mb-2">Chatting</div>
       <div>
         {chats?.map((chat, idx) => (
