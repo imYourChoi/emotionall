@@ -13,9 +13,9 @@ const Header = () => {
       <div className="flex w-full h-full mx-auto bg-white px-6 items-center justify-between">
         <div className="flex gap-x-4 items-center">
           {hasBackButton && (
-            <div onClick={() => router.back()}>
+            <button onClick={() => router.back()}>
               <ArrowLeftIcon className="fill-black-900" />
-            </div>
+            </button>
           )}
           {hasBackButton ? <div>{id}</div> : <LogoIcon width={"100px"} />}
         </div>
