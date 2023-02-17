@@ -29,7 +29,8 @@ const MessageForm = forwardRef(
           onChange={handleChangeMessage}
           onKeyDown={onKeyDown}
           onKeyUp={onKeyUp}
-          className="resize-none h-[46px] min-w-0 text-sm outline-none px-4 py-[14.5px] flex-1 shadow-[0_0_1px_black]"
+          placeholder="메시지를 입력해 주세요."
+          className="resize-none h-[46px] min-w-0 text-sm outline-none px-4 py-[14.5px] flex-1"
         ></textarea>
         <button
           disabled={disabled}

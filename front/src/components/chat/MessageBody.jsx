@@ -3,21 +3,21 @@ import Message from "./Message";
 import MessageSet from "./MessageSet";
 
 const MessageBody = ({ chats }) => {
-  const user_id = "my_id";
+  const member_id = "my_id";
   const memoizedChats = useMemo(() => {
     const bundledChats = [];
     let chatCache = null;
     chats.forEach((chat, idx) => {
       if (
         chatCache &&
-        // chatCache[0].user_id !== chat.user_id
+        // chatCache[0].member_id !== chat.member_id
         idx % 4 === 0
       ) {
         bundledChats.push(
           <MessageSet
             key={idx + new Date().toISOString().slice(11, 19)}
             chats={chatCache}
-            user_id={user_id}
+            member_id={member_id}
           />
         );
         chatCache = null;
@@ -30,7 +30,7 @@ const MessageBody = ({ chats }) => {
         <MessageSet
           key={new Date().toISOString().slice(11, 19)}
           chats={chatCache}
-          user_id={user_id}
+          member_id={member_id}
         />
       );
     }
