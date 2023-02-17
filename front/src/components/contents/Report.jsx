@@ -7,10 +7,43 @@ import BarChart from "./BarChart";
 import { checkTextEndsWithCoda } from "@/utils/texts";
 import BadgeAndPercent from "./BadgeAndPercent";
 import { InfoIcon } from "../icons/Icons";
+import { useEffect, useState } from "react";
+import { emotionClass } from "@/constants/emotion";
+
+const dummy = [
+  { name: "good", count: 499 },
+  { name: "dislike", count: 235 },
+  { name: "bored", count: 29 },
+  { name: "fear", count: 130 },
+  { name: "none", count: 302 },
+  { name: "sadness", count: 32 },
+  { name: "surprised", count: 32 },
+];
 
 const Report = () => {
   const { user } = useUser();
   const { mainEmotion: emotion } = useEmotion();
+  const [simple, setSimple] = useState([]);
+
+  useEffect(() => {
+    let s = { positive: 0, negative: 0, neutral: 0, ambiguous: 0 };
+    let total = 0;
+    dummy.forEach((item) => {
+      s[emotionClass[item.name].class] += item.count;
+      total += item.count;
+    });
+    setSimple(
+      Object.keys(s).reduce((p, c) => {
+        return [...p, { name: c, count: (s[c] / total) * 100 }];
+      }, [])
+    );
+    console.log(
+      Object.keys(s).reduce((p, c) => {
+        return [...p, { name: c, count: (s[c] / total) * 100 }];
+      }, [])
+    );
+  }, [dummy]);
+
   return (
     <div className="px-6 pt-4">
       <div className="report-title">감정 보고서</div>
@@ -36,27 +69,92 @@ const Report = () => {
         </div>
       </div>
       <div className="py-4">
-        <BarChart />
+        <BarChart data={simple} />
 
-        <div className="w-full bg-black-100 rounded-md px-4 py-2 text-sm mt-4 flex flex-col gap-1">
-          <div className="flex items-center gap-2">
+        <div className="w-full bg-black-100 rounded-md px-4 py-4 text-sm mt-6 flex flex-col gap-1">
+          <div className="flex items-center gap-2 font-bold">
             <InfoIcon width="18px" className="fill-black-600" />
             감정 분류에 대하여
           </div>
-          <div>
-            감정은 다음과 같이 분류돼요. 긍정 - 좋음 / 부정 - 싫음, 슬픔, 두려움
-            / 중립 - 감정 없음, 불확실 / 모호 - 놀람, 지루함, 창피함
+          <div className="grid grid-cols-2 gap-y-3 mt-2">
+            <div>
+              <span className="badge badge-positive py-1 px-2 text-xs">
+                긍정
+              </span>{" "}
+              좋음 / 놀람
+            </div>
+            <div>
+              <span className="badge badge-negative py-1 px-2 text-xs">
+                부정
+              </span>{" "}
+              싫음 / 슬픔 / 두려움
+            </div>
+            <div>
+              <span className="badge badge-neutral py-1 px-2 text-xs">
+                중립
+              </span>{" "}
+              감정없음 / 불확실
+            </div>
+            <div>
+              <span className="badge badge-ambiguous py-1 px-2 text-xs">
+                모호
+              </span>{" "}
+              지루함 / 창피함
+            </div>
           </div>
         </div>
 
-        <div className="grid grid-cols-2">
-          <div>
-            <div className="flex items-center gap-2 font-bold">
-              <div className="w-8 h-8 rounded-full flex items-center justify-center badge-positive">
-                1
-              </div>
-              좋음
-            </div>
+        <div className="font-bold text-center mt-6 mb-4">세부 감정</div>
+        <div className="flex gap-8 items-center justify-center h-36 w-full">
+          <div className="flex flex-col justify-center gap-4 h-full">
+            {dummy
+              .sort((a, b) => b.count - a.count)
+              .slice(0, 3)
+              .map((item, i) => (
+                <div className="flex items-center gap-2 font-bold">
+                  <div
+                    className={cc([
+                      "w-12 h-8 rounded-full flex items-center justify-center",
+                      emotionClass[item.name].class === "positive" &&
+                        "badge-positive",
+                      emotionClass[item.name].class === "negative" &&
+                        "badge-negative",
+                      emotionClass[item.name].class === "neutral" &&
+                        "badge-neutral",
+                      emotionClass[item.name].class === "ambiguous" &&
+                        "badge-ambiguous",
+                    ])}
+                  >
+                    {i + 1}위
+                  </div>
+                  {emotionClass[item.name].kor}
+                </div>
+              ))}
+          </div>
+          <div className="flex flex-col gap-2 justify-between h-full">
+            {dummy
+              .sort((a, b) => b.count - a.count)
+              .slice(3, 7)
+              .map((item, i) => (
+                <div className="flex items-center gap-2 font-semibold">
+                  <div
+                    className={cc([
+                      "w-9 h-6 text-sm rounded-full flex items-center justify-center",
+                      emotionClass[item.name].class === "positive" &&
+                        "badge-positive",
+                      emotionClass[item.name].class === "negative" &&
+                        "badge-negative",
+                      emotionClass[item.name].class === "neutral" &&
+                        "badge-neutral",
+                      emotionClass[item.name].class === "ambiguous" &&
+                        "badge-ambiguous",
+                    ])}
+                  >
+                    {i + 4}위
+                  </div>
+                  {emotionClass[item.name].kor}
+                </div>
+              ))}
           </div>
         </div>
       </div>

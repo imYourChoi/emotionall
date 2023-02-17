@@ -14,7 +14,7 @@ const BadgeAndPercent = ({ emotion, percent }) => (
     >
       {emotionName[emotion].kor}
     </div>
-    <div className="font-extrabold">{percent}%</div>
+    <div className="font-extrabold">{Math.round(percent)}%</div>
   </div>
 );
 

@@ -3,18 +3,10 @@ import cc from "classcat";
 import { emotionName } from "@/constants/emotion";
 import BadgeAndPercent from "./BadgeAndPercent";
 
-const dummy = [
-  { name: "positive", count: 53 },
-  { name: "neutral", count: 25 },
-  { name: "ambiguous", count: 12 },
-  { name: "negative", count: 10 },
-];
-
-const BarChart = () => {
-  const [data, setData] = useState(dummy);
+const BarChart = ({ data }) => {
   const [sorted, setSorted] = useState([]);
   useEffect(() => {
-    const newData = Array.from(dummy);
+    const newData = Array.from(data);
     newData.sort((a, b) => b.count - a.count);
     setSorted(newData);
   }, [data]);
