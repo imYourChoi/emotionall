@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .badge {
+    @apply font-semibold px-3 py-1 rounded-full  w-fit;
+  }
+
+  .badge-positive {
+    @apply text-positive bg-positive-blend;
+  }
+
+  .badge-negative {
+    @apply text-negative bg-negative-blend;
+  }
+
+  .badge-neutral {
+    @apply text-neutral bg-neutral-blend;
+  }
+
+  .badge-ambiguous {
+    @apply text-ambiguous bg-ambiguous-blend;
+  }
+
+  .badge-none {
+    @apply text-black-600 bg-white border-black-300 border-[1px];
+  }
+
+  .report-title {
+    @apply text-lg font-bold;
+  }
+}

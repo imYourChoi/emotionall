@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import Header from "@/components/layout/Header";
 import Navigation from "@/components/layout/Navigation";
 import "@/styles/globals.css";
+import "@/styles/tailwind.css";
 import EmotionContextProvider from "@/contexts/emotionContext";
 import UserContextProvider from "@/contexts/userContext";
 
@@ -16,6 +17,8 @@ export default function App({ Component, pageProps }) {
         "/chat",
         "/chat/[id]",
         "/contents",
+        "/contents/report",
+        "/contents/habit",
         "/settings",
       ].includes(router.pathname)
     ) {

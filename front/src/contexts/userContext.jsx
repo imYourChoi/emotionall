@@ -15,6 +15,7 @@ const UserContextProvider = ({ children }) => {
       hair: 0,
       glasses: 0,
     },
+    badge: "",
   });
 
   return (
