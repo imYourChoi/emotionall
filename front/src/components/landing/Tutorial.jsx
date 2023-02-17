@@ -295,7 +295,7 @@ const Tutorial = () => {
               type: "nomessage",
               item: (
                 <div className="animate-bubble origin-bottom-left">
-                  <Avatar width={"60px"} avatar={avatar} emotion="positive" />
+                  <Avatar width={"96px"} avatar={avatar} emotion="positive" />
                 </div>
               ),
             },
