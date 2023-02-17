@@ -5,6 +5,7 @@ import MessageBody from "../chat/MessageBody";
 import cc from "classcat";
 import Avatar from "../avatar/Avatar";
 import { sampleUserId } from "@/constants/etc";
+import { useRouter } from "next/router";
 
 const Tutorial = () => {
   const textAreaRef = useRef(null);
@@ -13,6 +14,8 @@ const Tutorial = () => {
   const [chats, setChats] = useState([]);
   const [message, setMessage] = useState("");
   const [disabled, setDisabled] = useState(true);
+  const [locked, setLocked] = useState(true);
+  const [end, setEnd] = useState(false);
 
   const [status, setStatus] = useState(0);
 
@@ -26,6 +29,8 @@ const Tutorial = () => {
   const [usermessage, setUsermessage] = useState("");
 
   useTextAreaAutosize(textAreaRef.current, message);
+
+  const router = useRouter();
 
   useEffect(() => {
     scrollToBottom(false);
@@ -45,7 +50,7 @@ const Tutorial = () => {
             ...chats,
             { text: "당신의 이름을 알려주세요.", member_id: "admin" },
           ]);
-          setDisabled(false);
+          setLocked(false);
         }, 500);
         break;
       case 1:
@@ -60,7 +65,7 @@ const Tutorial = () => {
             ...chats,
             { text: "지금 상태는 어떤가요?", member_id: "admin" },
           ]);
-          setDisabled(false);
+          setLocked(false);
         }, 800);
         break;
       case 2:
@@ -300,6 +305,7 @@ const Tutorial = () => {
               ),
             },
           ]);
+          setEnd(true);
         }, 600);
     }
   }, [status]);
@@ -331,7 +337,7 @@ const Tutorial = () => {
     }
     setMessage("");
     setStatus((s) => s + 1);
-    setDisabled(true);
+    setLocked(true);
   });
 
   const scrollToBottom = (doAnimation = false) => {
@@ -358,14 +364,26 @@ const Tutorial = () => {
           <MessageBody chats={chats} />
         </div>
       </div>
-      <MessageForm
-        ref={textAreaRef}
-        message={message}
-        disabled={disabled}
-        setDisabled={setDisabled}
-        setMessage={setMessage}
-        handleSendMessage={handleSendMessage}
-      />
+      {end ? (
+        <div className="fixed max-w-[430px] w-full mx-auto h-[60px] inset-x-0 bottom-0 bg-white z-10 flex items-center">
+          <button
+            className="w-full h-full bg-black-200 rounded font-bold hover:bg-black-300 transition-colors"
+            onClick={() => router.push("/")}
+          >
+            시작하기
+          </button>
+        </div>
+      ) : (
+        <MessageForm
+          ref={textAreaRef}
+          message={message}
+          disabled={disabled}
+          locked={locked}
+          setDisabled={setDisabled}
+          setMessage={setMessage}
+          handleSendMessage={handleSendMessage}
+        />
+      )}
     </>
   );
 };
