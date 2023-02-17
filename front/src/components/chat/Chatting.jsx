@@ -1,9 +1,10 @@
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect, useCallback } from "react";
 import { io } from "socket.io-client";
 import useTextAreaAutosize from "@/hooks/useTextareaAutosize";
 
+const socket = io("http://localhost:80");
+
 const Chatting = () => {
-  const socket = useRef(null);
   const textAreaRef = useRef(null);
 
   const [chats, setChats] = useState([]);
@@ -11,19 +12,22 @@ const Chatting = () => {
   useTextAreaAutosize(textAreaRef.current, message);
 
   useEffect(() => {
-    socket.current = io("http://localhost:80", {});
-    socket.current.on("message", (res) => {
-      setChats((chats) => [...chats, res.data]);
-    });
+    const handleReceiveMessage = (chat) => {
+      setChats((prevChats) => [...prevChats, chat.data]);
+    };
+
+    socket.on("message", handleReceiveMessage);
     return () => {
-      if (socket.current) socket.current.disconnect();
+      socket.off("message", handleReceiveMessage);
     };
   }, []);
 
-  const handleSendMessage = () => {
-    socket.current.emit("message", { data: message });
+  const handleSendMessage = useCallback(() => {
+    if (!message) return alert("메시지를 입력해 주세요.");
+    socket.emit("message", { data: message });
     setMessage("");
-  };
+  });
+
   const handleChangeMessage = (evt) => {
     setMessage(evt.target?.value);
   };
