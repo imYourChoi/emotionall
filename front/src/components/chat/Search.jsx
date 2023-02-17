@@ -44,7 +44,7 @@ export default function Search() {
       console.log(error);
     }
   };
-  const onCreateRoom = useCallback((friend) => () => {
+  const onCreateRoom = useCallback((friend) => {
     socket.emit("create-room", [userId, friend.id], (response) => {
       // socket.emit("join-room", response.room_id, () => {
       router.push(`/chat/${response.room_id}`);

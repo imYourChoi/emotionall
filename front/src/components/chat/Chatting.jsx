@@ -55,7 +55,7 @@ const Chatting = () => {
           time: new Date().toISOString(),
         },
       },
-      (res) => console.log("Well emitted!", res.message.text)
+      (res) => console.log("Well emitted!", res.message?.text)
     );
     setMessage("");
     setDisabled(true);
