@@ -8,7 +8,8 @@ const Message = ({ chat, isMyself, isLast }) => {
   };
   return (
     <div
-      className={"w-full py-[4.5px] flex" + (isMyself ? " justify-end" : "")}
+      className={"w-full py-[4.5px] flex"}
+      style={{ justifyContent: isMyself ? "flex-end" : "flex-start" }}
     >
       <div
         className={"w-fit px-[18px] py-2.5 text-base font-medium" + getColor()}
