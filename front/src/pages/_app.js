@@ -16,6 +16,7 @@ export default function App({ Component, pageProps }) {
         "/",
         "/chat",
         "/chat/[id]",
+        "/chat/search",
         "/contents",
         "/contents/report",
         "/contents/habit",

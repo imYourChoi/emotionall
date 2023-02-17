@@ -14,7 +14,8 @@ const Navigation = () => {
   const router = useRouter();
   const { mainEmotion } = useEmotion();
 
-  if (router.pathname === "/chat/[id]") return <></>;
+  if (router.pathname === "/chat/[id]" || router.pathname === "/chat/search")
+    return <></>;
   return (
     <div className="absolute bottom-0 inset-x-0 w-full h-[60px] mx-auto flex items-center justify-between px-12 bg-white">
       {pages.map((page) => (
