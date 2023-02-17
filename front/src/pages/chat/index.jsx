@@ -26,8 +26,8 @@ const mockFriends = [
   },
 ];
 
-const socket = io("http://192.168.8.85:80/chat");
-// export const socket = io("http://localhost:80");
+// const socket = io("http://192.168.8.85:80/chat");
+export const socket = io("http://localhost:80");
 
 export default function Chat() {
   const router = useRouter();
