@@ -20,7 +20,6 @@ export default function App({ Component, pageProps }) {
         "/contents",
         "/contents/report",
         "/contents/habit",
-        "/settings",
       ].includes(router.pathname)
     ) {
       router.replace("/");

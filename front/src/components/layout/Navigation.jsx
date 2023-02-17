@@ -7,7 +7,6 @@ const pages = [
   { path: "/", text: "홈", icon: HomeIcon },
   { path: "/chat", text: "채팅방", icon: ListIcon },
   { path: "/contents", text: "콘텐츠", icon: ContentsIcon },
-  { path: "/settings", text: "설정", icon: SettingIcon },
 ];
 
 const Navigation = () => {
@@ -17,7 +16,7 @@ const Navigation = () => {
   if (router.pathname === "/chat/[id]" || router.pathname === "/chat/search")
     return <></>;
   return (
-    <div className="absolute bottom-0 inset-x-0 w-full h-[60px] mx-auto flex items-center justify-between px-12 bg-white">
+    <div className="absolute bottom-0 inset-x-0 w-full h-[60px] mx-auto flex items-center justify-between px-16 bg-white">
       {pages.map((page) => (
         <Link
           href={page.path}
