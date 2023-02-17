@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { LogoIcon } from "../icons/logo";
+import { LogoIcon } from "../icons/Logo";
 
 const Header = () => {
   const router = useRouter();
