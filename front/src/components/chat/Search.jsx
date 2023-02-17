@@ -1,19 +1,15 @@
-import { useRef, useState, useCallback } from "react";
+import { useRef, useEffect, useState, useCallback } from "react";
 import { io } from "socket.io-client";
+import axios from "axios";
+import { useRouter } from "next/router";
 import SearchItem from "./SearchItem";
 
-// const socket = io("http://192.168.8.85:80/chat");
-const socket = io("http://localhost:80");
-
-const mockFriends = [
-  { member_id: 1, name: "김철수" },
-  { member_id: 2, name: "이영희" },
-  { member_id: 3, name: "박영수" },
-  { member_id: 4, name: "최영희" },
-];
+const socket = io("http://192.168.8.85:80/chat");
 
 export default function Search() {
   const enterPressed = useRef(false);
+  const router = useRouter();
+  const [allFriends, setAllFriends] = useState([]);
   const [friends, setFriends] = useState([]);
   const [name, setName] = useState("");
   const [disabled, setDisabled] = useState(true);
@@ -27,14 +23,30 @@ export default function Search() {
     setName(evt.target?.value);
     setDisabled(!evt.target?.value);
   };
-  const handleSearchName = (evt) => {
-    // api call to find freidns
+  const handleSearchName = async (evt) => {
+    if (allFriends.length) {
+      setFriends(allFriends.filter((friend) => friend.name.includes(name)));
+      return;
+    }
+    try {
+      const response = await axios.get(
+        "http://192.168.8.13:8080/member/memberList"
+      );
+      if (response.status === 200) {
+        setAllFriends(response.data);
+        setFriends(
+          response.data.filter((friend) => friend.name.includes(name))
+        );
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
   const onCreateRoom = useCallback((friend) => () => {
-    console.log(friend);
-    socket.emit("create-room", [4008, friend.member_id], (response) => {
-      console.log(response);
-      // router.push(`/chat/${response.roomId}`);
+    socket.emit("create-room", [4008, friend.id], (response) => {
+      socket.emit("join-room", response.room_id, (response) => {
+        router.push(`/chat/${response.room_id}`);
+      });
     });
   });
   const onKeyDown = (e) => {
@@ -65,9 +77,9 @@ export default function Search() {
           검색
         </button>
       </div>
-      {mockFriends.map((friend) => (
+      {friends?.map((friend) => (
         <SearchItem
-          key={friend.member_id}
+          key={friend.id}
           friend={friend}
           onClick={onCreateRoom(friend)}
         />
