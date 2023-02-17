@@ -1,7 +1,7 @@
 import Avatar from "../avatar/Avatar";
 import { AddIcon } from "../icons/Icons";
 
-const SearchItem = ({ friend, onClick }) => {
+const SearchItem = ({ friend, onClick = () => {} }) => {
   return (
     <div className="relative w-full h-[72px] pl-6 pr-4 py-1 flex items-center justify-between gap-x-2.5">
       <div className="flex items-center justify-between gap-x-2.5">
