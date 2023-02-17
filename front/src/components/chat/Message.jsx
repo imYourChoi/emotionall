@@ -6,14 +6,21 @@ const Message = ({ chat, isMyself, isLast }) => {
     prev.prob > current.prob ? prev : current
   );
   const emotionCategory = emotionClassKorean[biggestEmotion.value];
-  console.log(emotionCategory);
-  console.log(biggestEmotion);
   const getRadius = () => {
     if (!isLast) return "16px";
     return "16px 16px " + (isMyself ? "0 16px" : "16px 0");
   };
   const getColor = () => {
-    return "bg-neutral-blend";
+    switch (emotionCategory) {
+      case "neutral":
+        return "bg-neutral-blend";
+      case "positive":
+        return "bg-positive-blend";
+      case "negative":
+        return "bg-negative-blend";
+      case "ambiguous":
+        return "bg-ambiguous-blend";
+    }
   };
   return (
     <div

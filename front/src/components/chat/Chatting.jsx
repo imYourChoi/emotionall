@@ -47,11 +47,11 @@ const Chatting = () => {
       setChats((prevChats) => [...prevChats, chat]);
     };
 
-    socket.on("message", (chat) => {
+    socket.on("message_", (chat) => {
       setChats((prevChats) => [...prevChats, chat.message]);
     });
     return () => {
-      socket.off("message", handleReceiveMessage);
+      socket.off("message_", handleReceiveMessage);
       // socket.disconnect();
     };
   }, []);
