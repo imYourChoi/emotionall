@@ -25,13 +25,11 @@ const Chatting = () => {
 
   const [friend, setFriend] = useState(null);
 
-  /* const getFriendInfo = useCallback(async () => {
-    const friendId = (await axios.get(
-      `${process.env.NEXT_PUBLIC_API_HOST}/room/${room_id}`
-    )).data.filter((d)=>d.id!==userId)[0];
+  const getFriendInfo = useCallback(async () => {
+    console.log(router.query.friendId);
 
     const result = await axios.get(
-      `${process.env.NEXT_PUBLIC_API_HOST}/member/${friendId}`
+      `${process.env.NEXT_PUBLIC_API_HOST}/member/${router.query.friendId}`
     );
 
     if (result.status === 200) {
@@ -42,7 +40,7 @@ const Chatting = () => {
 
   useEffect(() => {
     getFriendInfo();
-  }, []); */
+  }, []);
 
   useEffect(() => {
     const handleReceiveMessage = (chat) => {
@@ -95,7 +93,7 @@ const Chatting = () => {
 
   return (
     <>
-      <div className="h-60 bg-white w-full flex flex-col items-center">
+      <div className="absolute h-10 bg-white w-full flex flex-col items-center">
         <div className="flex justify-center gap-2">
           <Avatar
             width={"96px"}

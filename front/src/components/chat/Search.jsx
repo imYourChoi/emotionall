@@ -4,6 +4,7 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import SearchItem from "./SearchItem";
 import { useUser } from "@/contexts/userContext";
+import { PositiveFace } from "../icons/Emotions";
 
 const socket = io("http://192.168.8.85:80");
 
@@ -15,6 +16,7 @@ export default function Search() {
   const [name, setName] = useState("");
   const [disabled, setDisabled] = useState(true);
   const { userId } = useUser();
+  const [loading, setLoading] = useState(false);
 
   const handleChangeName = (evt) => {
     if (enterPressed.current) {
@@ -26,6 +28,7 @@ export default function Search() {
     setDisabled(!evt.target?.value);
   };
   const handleSearchName = async (evt) => {
+    setLoading(true);
     if (allFriends.length) {
       setFriends(allFriends.filter((friend) => friend.name.includes(name)));
       return;
@@ -42,6 +45,8 @@ export default function Search() {
       }
     } catch (error) {
       console.log(error);
+    } finally {
+      setLoading(false);
     }
   };
   const onCreateRoom = useCallback((friend) => () => {
@@ -50,7 +55,7 @@ export default function Search() {
       { me: parseInt(userId), other: friend.id },
       (response) => {
         // socket.emit("join-room", response.room_id, () => {
-        router.push(`/chat/${response.room_id}`);
+        router.push(`/chat/${response.room_id}?friendId=${friend.id}`);
         // });
       }
     );
@@ -83,13 +88,21 @@ export default function Search() {
           검색
         </button>
       </div>
-      {friends?.map((friend) => (
-        <SearchItem
-          key={friend.id}
-          friend={friend}
-          onClick={onCreateRoom(friend)}
-        />
-      ))}
+      {loading ? (
+        <div className="w-full h-full flex items-center justify-center">
+          <div className="animate-pulse">
+            <PositiveFace width={"48px"} />
+          </div>
+        </div>
+      ) : (
+        friends?.map((friend) => (
+          <SearchItem
+            key={friend.id}
+            friend={friend}
+            onClick={onCreateRoom(friend)}
+          />
+        ))
+      )}
     </>
   );
 }
