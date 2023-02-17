@@ -44,9 +44,9 @@ export default function Search() {
   };
   const onCreateRoom = useCallback((friend) => () => {
     socket.emit("create-room", [4008, friend.id], (response) => {
-      socket.emit("join-room", response.room_id, (response) => {
-        router.push(`/chat/${response.room_id}`);
-      });
+      // socket.emit("join-room", response.room_id, () => {
+      router.push(`/chat/${response.room_id}`);
+      // });
     });
   });
   const onKeyDown = (e) => {

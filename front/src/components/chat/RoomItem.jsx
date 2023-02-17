@@ -1,9 +1,10 @@
 import Avatar from "../avatar/Avatar";
 
-const RoomItem = ({ friend, onClick }) => {
+const RoomItem = ({ room, onClick, emotion, userId }) => {
   const getEmotion = () => {
     return "bg-positive-blend";
   };
+  const friendInfo = room.members.find((member) => member.id !== userId);
   return (
     <div
       onClick={onClick}
@@ -20,8 +21,14 @@ const RoomItem = ({ friend, onClick }) => {
         emotion="positive"
       />
       <div className="flex flex-col justify-center gap-y-1">
-        <div className="text-sm font-bold">{friend.name}</div>
-        <div className="text-base font-medium">{friend.message}</div>
+        <div className="flex items-center gap-x-1">
+          <div className="text-sm font-bold">{friendInfo.name}</div>
+          {emotion}
+        </div>
+        {/* <div className="text-base font-medium">{room.message}</div> */}
+        <div className="text-base font-medium">
+          원래는 최근 메시지를 넣으려고 했다!
+        </div>
       </div>
       <div
         className={"absolute right-0 inset-y-0 h-full w-3 " + getEmotion()}

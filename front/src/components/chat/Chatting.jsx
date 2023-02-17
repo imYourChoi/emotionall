@@ -24,12 +24,14 @@ const Chatting = () => {
       console.log(chat);
       setChats((prevChats) => [...prevChats, chat]);
     };
-
-    socket.on("message", handleReceiveMessage, (response) => {
-      console.log(response);
+    socket.emit("join-room", { room_id }, () => {});
+    socket.on("message", function (chat) {
+      console.log(chat);
+      setChats((prevChats) => [...prevChats, chat.message]);
     });
     return () => {
       socket.off("message", handleReceiveMessage);
+      // socket.disconnect();
     };
   }, []);
 
@@ -38,14 +40,18 @@ const Chatting = () => {
   }, [chats.length]);
 
   const handleSendMessage = useCallback(() => {
-    socket.emit("message", {
-      room_id: room_id,
-      message: {
-        member_id: 4008,
-        text: message,
-        time: new Date().toISOString(),
+    socket.emit(
+      "message",
+      {
+        room_id: room_id,
+        message: {
+          member_id: 4008,
+          text: message,
+          time: new Date().toISOString(),
+        },
       },
-    });
+      (res) => console.log("Well emitted!", res.message.text)
+    );
     setMessage("");
     setDisabled(true);
   });
