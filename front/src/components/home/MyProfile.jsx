@@ -36,6 +36,7 @@ const MyProfile = () => {
               placeholder={user.nickname}
               defaultValue={user.nickname}
               autoFocus
+              onBlur={() => setIsEditingName(false)}
               maxLength={8}
             />
           ) : (
@@ -52,6 +53,7 @@ const MyProfile = () => {
               placeholder={user.message}
               defaultValue={user.message}
               autoFocus
+              onBlur={() => setIsEditingMessage(false)}
               maxLength={20}
             />
           ) : (
