@@ -91,6 +91,7 @@ const Tutorial = () => {
                 <div className="tutorial-buttons">
                   {[...Array(4)].map((_, i) => (
                     <button
+                      key={i}
                       className={cc([
                         "transition-all",
                         avatar.skin === -1 && "hover:bg-black-200",
@@ -135,6 +136,7 @@ const Tutorial = () => {
                 <div className="tutorial-buttons">
                   {[...Array(15)].map((_, i) => (
                     <button
+                      key={i}
                       className={cc([
                         "transition-all w-16 h-16 relative",
                         avatar.hair === -1 && "hover:bg-black-200",
@@ -183,6 +185,7 @@ const Tutorial = () => {
                 <div className="tutorial-buttons">
                   {[...Array(5)].map((_, i) => (
                     <button
+                      key={i}
                       className={cc([
                         "transition-all w-16 h-16 relative",
                         avatar.eyes === -1 && "hover:bg-black-200",
@@ -235,6 +238,7 @@ const Tutorial = () => {
                 <div className="tutorial-buttons">
                   {[...Array(4)].map((_, i) => (
                     <button
+                      key={i}
                       className={cc([
                         "transition-all w-16 h-16 relative",
                         avatar.glasses === -1 && "hover:bg-black-200",
