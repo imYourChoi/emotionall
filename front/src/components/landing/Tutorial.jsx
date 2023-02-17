@@ -6,6 +6,8 @@ import cc from "classcat";
 import Avatar from "../avatar/Avatar";
 import { sampleUserId } from "@/constants/etc";
 import { useRouter } from "next/router";
+import { useUser } from "@/contexts/userContext";
+import axios from "axios";
 
 const Tutorial = () => {
   const textAreaRef = useRef(null);
@@ -27,6 +29,8 @@ const Tutorial = () => {
     glasses: -1,
   });
   const [usermessage, setUsermessage] = useState("");
+
+  const { setUserId } = useUser();
 
   useTextAreaAutosize(textAreaRef.current, message);
 
@@ -321,6 +325,20 @@ const Tutorial = () => {
     setStatus((s) => s + 1);
   }, [avatar]);
 
+  const makeUser = useCallback(async () => {
+    setUserId("ㄴㅁㄴㅇㅁㄴㅇ");
+    localStorage.setItem("userId", "ㅁㄴㅇㄹ");
+
+    /* const result = await axios.post(
+      `${process.env.NEXT_PUBLIC_API_HOST}/`,
+      { nickname, ...avatar, usermessage },
+      { headers: { "Content-Type": "application/json" } }
+    );
+    if (result.status === 200) {
+      setUserId(result.data);
+    } */
+  });
+
   const handleSendMessage = useCallback(() => {
     const m = message;
     setChats((chats) => [...chats, { text: message, member_id: sampleUserId }]);
@@ -368,7 +386,9 @@ const Tutorial = () => {
         <div className="fixed max-w-[430px] w-full mx-auto h-[60px] inset-x-0 bottom-0 bg-white z-10 flex items-center">
           <button
             className="w-full h-full bg-black-200 rounded font-bold hover:bg-black-300 transition-colors"
-            onClick={() => router.push("/")}
+            onClick={() => {
+              makeUser();
+            }}
           >
             시작하기
           </button>

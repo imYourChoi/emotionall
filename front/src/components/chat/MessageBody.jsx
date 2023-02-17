@@ -17,7 +17,8 @@ const MessageBody = ({ chats }) => {
             {(i == 0 || chats[i - 1].member_id != chat.member_id) &&
               chats[i]?.type !==
                 "nomessage" /* || chats[i - 1].emotion != chat.emotion) */ &&
-              chats[i - 1]?.type !== "nomessage" && (
+              chats[i - 1]?.type !== "nomessage" &&
+              userId && (
                 <div
                   className="flex"
                   style={{

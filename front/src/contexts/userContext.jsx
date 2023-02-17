@@ -1,4 +1,5 @@
-import { createContext, useContext, useState } from "react";
+import Landing from "@/components/landing";
+import { createContext, useContext, useEffect, useState } from "react";
 
 export const UserContext = createContext({
   mainUser: null,
@@ -6,10 +7,10 @@ export const UserContext = createContext({
 });
 
 const UserContextProvider = ({ children }) => {
-  const [userId, setUserId] = useState("t");
+  const [userId, setUserId] = useState(null);
   const [user, setUser] = useState({
-    nickname: "김철수",
-    message: "예시",
+    nickname: "",
+    message: "",
     avatar: {
       skin: 0,
       eyes: 0,
@@ -19,9 +20,25 @@ const UserContextProvider = ({ children }) => {
     badge: "",
   });
 
+  useEffect(() => {
+    const u = localStorage.getItem("userId");
+    if (u) {
+      setUserId(u);
+      // 서버에서 userId로 user 받아오기...
+    }
+  }, []);
+
   return (
-    <UserContext.Provider value={{ userId, user, setUser }}>
-      {children}
+    <UserContext.Provider value={{ userId, user, setUser, setUserId }}>
+      {userId ? (
+        children
+      ) : (
+        <div id="container" className="flex items-center justify-center">
+          <main className="relative w-full max-w-[430px] h-screen">
+            <Landing />
+          </main>
+        </div>
+      )}
     </UserContext.Provider>
   );
 };

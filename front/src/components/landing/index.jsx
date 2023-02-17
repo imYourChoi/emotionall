@@ -1,6 +1,6 @@
 import Tutorial from "@/components/landing/Tutorial";
 import { useState } from "react";
-import { LogoIcon } from "../../components/icons/Logo";
+import { LogoIcon } from "../icons/Logo";
 
 const Landing = () => {
   const [status, setStatus] = useState(0);
