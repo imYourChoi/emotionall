@@ -35,7 +35,7 @@ const MessageBody = ({ chats }) => {
                     }}
                     emotion="positive"
                     style={{
-                      transform: isMyself(chat) ? "rotateY(180deg)" : undefined,
+                      transform: isMyself(chat) ? undefined : "rotateY(180deg)",
                     }}
                   />
                 </div>
