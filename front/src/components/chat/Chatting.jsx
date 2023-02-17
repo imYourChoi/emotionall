@@ -26,7 +26,7 @@ const Chatting = () => {
   const [friend, setFriend] = useState(null);
 
   const getFriendInfo = useCallback(async () => {
-    console.log(router.query.friendId);
+    if (!router.query.friendId) return;
 
     const result = await axios.get(
       `${process.env.NEXT_PUBLIC_API_HOST}/member/${router.query.friendId}`
@@ -36,11 +36,11 @@ const Chatting = () => {
       console.log(result.data);
       setFriend(result.data);
     }
-  }, []);
+  }, [router.query.friendId]);
 
   useEffect(() => {
     getFriendInfo();
-  }, []);
+  }, [router.query.friendId]);
 
   useEffect(() => {
     const handleReceiveMessage = (chat) => {
