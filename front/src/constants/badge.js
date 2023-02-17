@@ -2,7 +2,7 @@ export const badge = {
   "": {
     name: "새내기",
     color: "neutral",
-    description: ["아직 emotionall에서 획득한 뱃지가 없어요."],
+    description: ["아직 획득한 뱃지가 없어요."],
   },
   "positive-max": {
     name: "파워긍정 수다쟁이",
