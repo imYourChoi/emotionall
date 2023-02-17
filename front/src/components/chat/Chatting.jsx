@@ -2,7 +2,9 @@ import { useRef, useState, useEffect, useCallback } from "react";
 import { io } from "socket.io-client";
 import useTextAreaAutosize from "@/hooks/useTextareaAutosize";
 import MessageForm from "./MessageForm";
+import MessageBody from "./MessageBody";
 
+// const socket = io("http://192.168.8.85:80/chat");
 const socket = io("http://localhost:80");
 
 const Chatting = () => {
@@ -34,13 +36,10 @@ const Chatting = () => {
   };
 
   return (
-    <div className="h-full flex flex-col overflow-scroll relative">
-      <div className="mb-2">Chatting</div>
-      <div>
-        {chats?.map((chat, idx) => (
-          <div key={idx}>Text : {chat} </div>
-        ))}
-      </div>
+    <div className="h-full flex flex-col justify-end overflow-scroll relative px-6 py-2.5">
+      {chats?.map((chat, idx) => (
+        <MessageBody key={idx} message={chat} />
+      ))}
       <MessageForm
         ref={textAreaRef}
         message={message}
