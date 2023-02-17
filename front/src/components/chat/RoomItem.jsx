@@ -1,9 +1,7 @@
-import Link from "next/link";
-
-const RoomItem = ({ friend }) => {
+const RoomItem = ({ friend, onClick }) => {
   return (
-    <Link
-      href={`/chat/${friend.name}`}
+    <div
+      onClick={onClick}
       className="relative w-full h-[72px] px-6 py-1 flex gap-x-2.5"
     >
       <img className="w-16 h-16 bg-black-200 rounded-full" alt="profile-img" />
@@ -12,7 +10,7 @@ const RoomItem = ({ friend }) => {
         <div className="text-base font-medium">{friend.message}</div>
       </div>
       <div className="absolute right-0 inset-y-0 bg-positive-blend h-full w-3" />
-    </Link>
+    </div>
   );
 };
 
