@@ -13,7 +13,6 @@ const Chatting = () => {
   useEffect(() => {
     socket.current = io("http://localhost:80", {});
     socket.current.on("message", (res) => {
-      console.log(res);
       setChats((chats) => [...chats, res.data]);
     });
     return () => {
