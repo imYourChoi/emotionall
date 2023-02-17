@@ -1,11 +1,16 @@
+import Link from "next/link";
 import { useRouter } from "next/router";
-import { ArrowLeftIcon } from "../icons/Icons";
+import { ArrowLeftIcon, AddIcon } from "../icons/Icons";
 import { LogoIcon } from "../icons/Logo";
 
 const Header = () => {
   const router = useRouter();
   const hasBackButton =
-    router.pathname === "/chat/[id]" || router.pathname.includes("/contents/");
+    router.pathname === "/chat/[id]" ||
+    router.pathname === "/chat/search" ||
+    router.pathname.includes("/contents/");
+  const hasAddButton = router.pathname === "/chat";
+  const isSearch = router.pathname === "/chat/search";
   const id = router.query.id;
 
   return (
@@ -17,8 +22,20 @@ const Header = () => {
               <ArrowLeftIcon className="fill-black-900" />
             </button>
           )}
-          {hasBackButton ? <div>{id}</div> : <LogoIcon width={"100px"} />}
+          {hasBackButton ? (
+            <div className="font-bold text-sm">{id}</div>
+          ) : (
+            <LogoIcon width={"100px"} />
+          )}
+          {isSearch && (
+            <div className="font-bold text-sm ml-[-16px]">친구 검색</div>
+          )}
         </div>
+        {hasAddButton && (
+          <Link href={"/chat/search"}>
+            <AddIcon />
+          </Link>
+        )}
       </div>
     </div>
   );
