@@ -7,8 +7,8 @@ const Header = () => {
   const id = router.query.id;
 
   return (
-    <div className="fixed top-0 inset-x-0 h-[60px] z-10">
-      <div className="max-w-[430px]  flex w-full h-full mx-auto bg-white px-6 items-center justify-between">
+    <div className="absolute top-0 inset-x-0 h-[60px] z-10">
+      <div className="flex w-full h-full mx-auto bg-white px-6 items-center justify-between">
         <div className="flex gap-x-4 items-center">
           {isChat && <div onClick={() => router.back()}>←</div>}
           {isChat ? <div>{id}</div> : <LogoIcon width={"100px"} />}
