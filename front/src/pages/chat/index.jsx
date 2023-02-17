@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState } from "react";
 import { useUser } from "@/contexts/userContext";
 import { io } from "socket.io-client";
 import { useRouter } from "next/router";
@@ -33,14 +33,14 @@ const mockFriends = [
   },
 ];
 
-const getEmotion = () => {
+/* const getEmotion = () => {
   return [
     <PositiveFace />,
     <NegativeFace />,
     <NeutralFace />,
     <AmbiguousFace />,
   ][Math.floor(Math.random() * 4)];
-};
+}; */
 
 const socket = io("http://192.168.8.85:80/chat");
 // export const socket = io("http://localhost:80");
