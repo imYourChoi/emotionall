@@ -42,7 +42,7 @@ const getEmotion = () => {
   ][Math.floor(Math.random() * 4)];
 };
 
-const socket = io("http://192.168.8.85:80/chat");
+const socket = io("http://192.168.8.85:80");
 // export const socket = io("http://localhost:80");
 
 export default function Chat() {
