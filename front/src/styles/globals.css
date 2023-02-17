@@ -46,3 +46,7 @@ a {
 ::-webkit-scrollbar-track {
   background: transparent; /*스크롤바 뒷 배경 색상*/
 }
+
+.pixelated {
+  image-rendering: pixelated;
+}
