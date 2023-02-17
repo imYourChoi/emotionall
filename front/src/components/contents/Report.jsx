@@ -111,7 +111,7 @@ const Report = () => {
               .sort((a, b) => b.count - a.count)
               .slice(0, 3)
               .map((item, i) => (
-                <div className="flex items-center gap-2 font-bold">
+                <div className="flex items-center gap-2 font-bold" key={i}>
                   <div
                     className={cc([
                       "w-12 h-8 rounded-full flex items-center justify-center",
@@ -136,7 +136,7 @@ const Report = () => {
               .sort((a, b) => b.count - a.count)
               .slice(3, 7)
               .map((item, i) => (
-                <div className="flex items-center gap-2 font-semibold">
+                <div className="flex items-center gap-2 font-semibold" key={i}>
                   <div
                     className={cc([
                       "w-9 h-6 text-sm rounded-full flex items-center justify-center",
@@ -165,7 +165,7 @@ const Report = () => {
           <div className="font-bold text-sm">나와 성향이 같은 친구들</div>
           <div className="grid grid-cols-2">
             {[...Array(2)].map((_, i) => (
-              <div className="flex flex-col items-center px-2 py-2">
+              <div className="flex flex-col items-center px-2 py-2" key={i}>
                 <Avatar
                   width={"32px"}
                   avatar={{ skin: i, eyes: i + 1, hair: i + 6, glasses: 0 }}
@@ -185,7 +185,7 @@ const Report = () => {
           <div className="font-bold text-sm">잘 맞는 성향의 친구들</div>
           <div className="grid grid-cols-2">
             {[...Array(2)].map((_, i) => (
-              <div className="flex flex-col items-center px-2 py-2">
+              <div className="flex flex-col items-center px-2 py-2" key={i}>
                 <Avatar
                   width={"32px"}
                   avatar={{ skin: 1, eyes: 2, hair: 13 - i * 6, glasses: 0 }}

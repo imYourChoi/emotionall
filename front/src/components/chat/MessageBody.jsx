@@ -13,7 +13,7 @@ const MessageBody = ({ chats }) => {
     <div className="min-h-full flex flex-col justify-end">
       {chats.map((chat, i) => {
         return (
-          <div>
+          <div key={i}>
             {(i == 0 || chats[i - 1].member_id != chat.member_id) &&
               chats[i]?.type !==
                 "nomessage" /* || chats[i - 1].emotion != chat.emotion) */ &&
