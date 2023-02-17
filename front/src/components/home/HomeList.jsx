@@ -53,7 +53,7 @@ const HomeList = () => {
           {friends
             .filter((item) => item.id !== userId)
             .map((item, i) => (
-              <Item key={i} friend={item} />
+              <Item key={i} item={item} />
             ))}
         </div>
       </div>
