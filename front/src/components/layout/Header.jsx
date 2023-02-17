@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import Logo from "@/assets/Logo.svg";
+import { LogoIcon } from "../icons/logo";
 
 const Header = () => {
   const router = useRouter();
@@ -11,7 +11,7 @@ const Header = () => {
       <div className="max-w-[430px]  flex w-full h-full mx-auto bg-white px-6 items-center justify-between">
         <div className="flex gap-x-4 items-center">
           {isChat && <div onClick={() => router.back()}>←</div>}
-          {isChat ? <div>{id}</div> : <Logo />}
+          {isChat ? <div>{id}</div> : <LogoIcon width={"100px"} />}
         </div>
       </div>
     </div>
