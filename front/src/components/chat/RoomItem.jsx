@@ -1,10 +1,9 @@
 import Avatar from "../avatar/Avatar";
 
-const RoomItem = ({ room, onClick, emotion, userId }) => {
+const RoomItem = ({ room, onClick, emotion, userId, friend }) => {
   const getEmotion = () => {
     return "bg-positive-blend";
   };
-  const friendInfo = room?.members.find((member) => member.id !== userId);
   return (
     <div
       onClick={onClick}
@@ -13,16 +12,16 @@ const RoomItem = ({ room, onClick, emotion, userId }) => {
       <Avatar
         width="64px"
         avatar={{
-          skin: Math.floor(Math.random() * 4),
-          eyes: Math.floor(Math.random() * 5),
-          hair: Math.floor(Math.random() * 15),
-          glasses: Math.floor(Math.random() * 4),
+          skin: friend?.avatar_skin_id,
+          eyes: friend?.avatar_eyes_id,
+          glasses: friend?.avatar_glasses_id,
+          hair: friend?.avatar_hair_id,
         }}
         emotion="positive"
       />
       <div className="flex flex-col justify-center gap-y-1">
         <div className="flex items-center gap-x-1">
-          <div className="text-sm font-bold">{friendInfo.name}</div>
+          <div className="text-sm font-bold">{friend?.name}</div>
           {emotion}
         </div>
         {/* <div className="text-base font-medium">{room.message}</div> */}
