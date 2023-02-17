@@ -8,6 +8,13 @@ export const UserContext = createContext({
 const UserContextProvider = ({ children }) => {
   const [user, setUser] = useState({
     nickname: "",
+    message: "",
+    avatar: {
+      skin: 0,
+      eyes: 0,
+      hair: 0,
+      glasses: 0,
+    },
   });
 
   return (
