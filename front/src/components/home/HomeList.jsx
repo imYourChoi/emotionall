@@ -2,7 +2,21 @@ import { useUser } from "@/contexts/userContext";
 import axios from "axios";
 import { useCallback, useEffect, useState } from "react";
 import Avatar from "../avatar/Avatar";
-import { PositiveFace } from "../icons/Emotions";
+import {
+  PositiveFace,
+  NegativeFace,
+  NeutralFace,
+  AmbiguousFace,
+} from "@/components/icons/Emotions";
+
+const getEmotion = () => {
+  return [
+    <PositiveFace />,
+    <NegativeFace />,
+    <NeutralFace />,
+    <AmbiguousFace />,
+  ][Math.floor(Math.random() * 4)];
+};
 
 const Item = ({ item }) => {
   return (
@@ -20,9 +34,7 @@ const Item = ({ item }) => {
         />
       </div>
       <div className="font-medium text-sm">{item?.name}</div>
-      <div className="absolute top-0 right-0">
-        <PositiveFace />
-      </div>
+      <div className="absolute top-0 right-0">{getEmotion()}</div>
     </div>
   );
 };

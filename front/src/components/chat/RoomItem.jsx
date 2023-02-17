@@ -26,9 +26,7 @@ const RoomItem = ({ room, onClick, emotion, userId }) => {
           {emotion}
         </div>
         {/* <div className="text-base font-medium">{room.message}</div> */}
-        <div className="text-base font-medium">
-          원래는 최근 메시지를 넣으려고 했다!
-        </div>
+        <div className="text-base font-medium">채널톡 좋아요ㅋㅋㅋ</div>
       </div>
       <div
         className={"absolute right-0 inset-y-0 h-full w-3 " + getEmotion()}
