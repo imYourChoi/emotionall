@@ -1,3 +1,5 @@
+import ContentsList from "@/components/contents/ContentsList";
+
 export default function Contents() {
-  return <div>Contents</div>;
+  return <ContentsList />;
 }
