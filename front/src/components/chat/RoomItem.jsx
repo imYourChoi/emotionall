@@ -4,7 +4,7 @@ const RoomItem = ({ room, onClick, emotion, userId }) => {
   const getEmotion = () => {
     return "bg-positive-blend";
   };
-  const friendInfo = room.members.find((member) => member.id !== userId);
+  const friendInfo = room?.members.find((member) => member.id !== userId);
   return (
     <div
       onClick={onClick}

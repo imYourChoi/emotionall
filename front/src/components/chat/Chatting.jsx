@@ -46,7 +46,6 @@ const Chatting = () => {
 
   useEffect(() => {
     const handleReceiveMessage = (chat) => {
-      console.log(chat);
       setChats((prevChats) => [...prevChats, chat]);
     };
 
