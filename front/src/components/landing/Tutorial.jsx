@@ -30,7 +30,7 @@ const Tutorial = () => {
   });
   const [usermessage, setUsermessage] = useState("");
 
-  const { setUserId } = useUser();
+  const { setUserId, setUser } = useUser();
 
   useTextAreaAutosize(textAreaRef.current, message);
 
@@ -58,21 +58,6 @@ const Tutorial = () => {
         }, 500);
         break;
       case 1:
-        setTimeout(() => {
-          setChats((chats) => [
-            ...chats,
-            { text: "멋진 이름이네요.", member_id: "admin" },
-          ]);
-        }, 500);
-        setTimeout(() => {
-          setChats((chats) => [
-            ...chats,
-            { text: "지금 상태는 어떤가요?", member_id: "admin" },
-          ]);
-          setLocked(false);
-        }, 800);
-        break;
-      case 2:
         setTimeout(() => {
           setChats((chats) => [
             ...chats,
@@ -131,7 +116,7 @@ const Tutorial = () => {
           ]);
         }, 1300);
         break;
-      case 3:
+      case 2:
         setTimeout(() => {
           setChats((chats) => [
             ...chats,
@@ -179,7 +164,7 @@ const Tutorial = () => {
           ]);
         }, 600);
         break;
-      case 4:
+      case 3:
         setTimeout(() => {
           setChats((chats) => [
             ...chats,
@@ -231,7 +216,7 @@ const Tutorial = () => {
           ]);
         }, 600);
         break;
-      case 5:
+      case 4:
         setTimeout(() => {
           setChats((chats) => [
             ...chats,
@@ -287,7 +272,7 @@ const Tutorial = () => {
           ]);
         }, 600);
         break;
-      case 6:
+      case 5:
         setTimeout(() => {
           setChats((chats) => [
             ...chats,
@@ -326,17 +311,35 @@ const Tutorial = () => {
   }, [avatar]);
 
   const makeUser = useCallback(async () => {
-    setUserId("ㄴㅁㄴㅇㅁㄴㅇ");
-    localStorage.setItem("userId", "ㅁㄴㅇㄹ");
-
-    /* const result = await axios.post(
-      `${process.env.NEXT_PUBLIC_API_HOST}/`,
-      { nickname, ...avatar, usermessage },
-      { headers: { "Content-Type": "application/json" } }
+    const f = new FormData();
+    f.append("name", nickname);
+    f.append("avatar_skin_id", avatar.skin);
+    f.append("avatar_eyes_id", avatar.eyes);
+    f.append("avatar_hair_id", avatar.hair);
+    f.append("avatar_glasses_id", avatar.glasses);
+    /* {
+      nickname,
+      avatar_skin_id: avatar.skin,
+      avatar_eyes_id: avatar.eyes,
+      avatar_hair_id: avatar.hair,
+      avatar_glasses_id: avatar.glasses,
+    } */
+    const result = await axios.post(
+      `${process.env.NEXT_PUBLIC_API_HOST}/member/join`,
+      f,
+      { headers: { "Content-Type": "multipart/form-data" } }
     );
+
     if (result.status === 200) {
       setUserId(result.data);
-    } */
+      setUser({ message: usermessage, nickname, avatar, badge: "" });
+      localStorage.setItem("userId", result.data);
+      localStorage.setItem(
+        "user",
+        JSON.stringify({ message: usermessage, nickname, avatar, badge: "" })
+      );
+      router.push("/");
+    }
   });
 
   const handleSendMessage = useCallback(() => {

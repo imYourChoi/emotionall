@@ -1,3 +1,4 @@
+import { sampleUserId } from "@/constants/etc";
 import { useUser } from "@/contexts/userContext";
 import { useMemo } from "react";
 import Avatar from "../avatar/Avatar";
@@ -5,7 +6,8 @@ import Message from "./Message";
 
 const MessageBody = ({ chats }) => {
   const { userId } = useUser();
-  const isMyself = (chat) => chat.member_id == userId;
+  const isMyself = (chat) =>
+    chat.member_id == userId || chat.member_id == sampleUserId;
 
   return (
     <div className="min-h-full flex flex-col justify-end">

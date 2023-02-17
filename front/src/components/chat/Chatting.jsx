@@ -4,6 +4,7 @@ import { io } from "socket.io-client";
 import useTextAreaAutosize from "@/hooks/useTextareaAutosize";
 import MessageForm from "./MessageForm";
 import MessageBody from "./MessageBody";
+import { useUser } from "@/contexts/userContext";
 
 const socket = io("http://192.168.8.85:80");
 // const socket = io("http://localhost:80");
@@ -16,6 +17,7 @@ const Chatting = () => {
   const [chats, setChats] = useState([]);
   const [message, setMessage] = useState("");
   const [disabled, setDisabled] = useState(!message);
+  const { userId } = useUser();
   const room_id = router.query.id;
   useTextAreaAutosize(textAreaRef.current, message);
 
@@ -52,7 +54,7 @@ const Chatting = () => {
       {
         room_id: room_id,
         message: {
-          member_id: 4008,
+          member_id: userId,
           text: message,
           time: new Date().toISOString(),
         },
