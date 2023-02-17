@@ -9,9 +9,11 @@ const socket = io("http://localhost:80");
 
 const Chatting = () => {
   const textAreaRef = useRef(null);
+  const messageBodyRef = useRef(null);
 
   const [chats, setChats] = useState([]);
   const [message, setMessage] = useState("");
+  const [disabled, setDisabled] = useState(!message);
   useTextAreaAutosize(textAreaRef.current, message);
 
   useEffect(() => {
@@ -25,28 +27,50 @@ const Chatting = () => {
     };
   }, []);
 
+  useEffect(() => {
+    scrollToBottom(true);
+  }, [chats.length]);
+
   const handleSendMessage = useCallback(() => {
-    if (!message) return alert("메시지를 입력해 주세요.");
     socket.emit("message", { data: message });
     setMessage("");
   });
 
-  const handleChangeMessage = (evt) => {
-    setMessage(evt.target?.value);
+  const scrollToBottom = (doAnimation = false) => {
+    if (messageBodyRef.current) {
+      const scrollTop = messageBodyRef.current.scrollHeight;
+      if (doAnimation) {
+        messageBodyRef.current.scroll({
+          behavior: "smooth",
+          top: scrollTop,
+        });
+      } else {
+        messageBodyRef.current.scrollTop = scrollTop;
+      }
+    }
   };
 
   return (
-    <div className="h-full flex flex-col justify-end overflow-scroll relative px-6 py-2.5">
-      {chats?.map((chat, idx) => (
-        <MessageBody key={idx} message={chat} />
-      ))}
+    <>
+      <div
+        ref={messageBodyRef}
+        className="h-full overflow-scroll relative px-6 "
+      >
+        <div className="min-h-full flex flex-col justify-end py-2.5">
+          {chats?.map((chat, idx) => (
+            <MessageBody key={idx} message={chat} />
+          ))}
+        </div>
+      </div>
       <MessageForm
         ref={textAreaRef}
         message={message}
-        handleChangeMessage={handleChangeMessage}
+        disabled={disabled}
+        setDisabled={setDisabled}
+        setMessage={setMessage}
         handleSendMessage={handleSendMessage}
       />
-    </div>
+    </>
   );
 };
 
