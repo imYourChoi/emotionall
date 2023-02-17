@@ -1,4 +1,16 @@
-import { useRef, useState, useEffect, useCallback } from "react";
+import { useRef, useState, useCallback } from "react";
+import { io } from "socket.io-client";
+import SearchItem from "./SearchItem";
+
+// const socket = io("http://192.168.8.85:80/chat");
+const socket = io("http://localhost:80");
+
+const mockFriends = [
+  { member_id: 1, name: "김철수" },
+  { member_id: 2, name: "이영희" },
+  { member_id: 3, name: "박영수" },
+  { member_id: 4, name: "최영희" },
+];
 
 export default function Search() {
   const enterPressed = useRef(false);
@@ -18,8 +30,10 @@ export default function Search() {
   const handleSearchName = (evt) => {
     // api call to find freidns
   };
-  const onCreateRoom = useCallback((nickname) => () => {
-    socket.emit("create-room", ["me", nickname], (response) => {
+  const onCreateRoom = useCallback((friend) => () => {
+    console.log(friend);
+    socket.emit("create-room", [4008, friend.member_id], (response) => {
+      console.log(response);
       // router.push(`/chat/${response.roomId}`);
     });
   });
@@ -30,7 +44,7 @@ export default function Search() {
     if (e.keyCode === 13) enterPressed.current = false;
   };
   return (
-    <div className="">
+    <>
       <div className="max-w-[430px] w-full mx-auto inset-x-0 bottom-0 bg-white z-10 px-4 py-[7px] flex gap-x-2.5 items-center">
         <textarea
           value={name}
@@ -51,6 +65,13 @@ export default function Search() {
           검색
         </button>
       </div>
-    </div>
+      {mockFriends.map((friend) => (
+        <SearchItem
+          key={friend.member_id}
+          friend={friend}
+          onClick={onCreateRoom(friend)}
+        />
+      ))}
+    </>
   );
 }

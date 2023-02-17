@@ -45,11 +45,6 @@ export default function Chat() {
       socket.off("create-room", createRoomHandler);
     };
   }, []);
-  const onCreateRoom = useCallback((nickname) => () => {
-    socket.emit("create-room", ["me", nickname], (response) => {
-      // router.push(`/chat/${response.roomId}`);
-    });
-  });
   const onJoinRoom = useCallback((roomId) => () => {
     router.push(`/chat/${roomId}`); // 임시로 만들어둠
     socket.emit("join-room", () => {
@@ -65,7 +60,6 @@ export default function Chat() {
           onClick={onJoinRoom(friend.id)}
         />
       ))}
-      <div onClick={onCreateRoom("Anybody")}>let's create room</div>
     </div>
   );
 }
