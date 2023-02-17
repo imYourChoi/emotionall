@@ -28,7 +28,7 @@ export default function App({ Component, pageProps }) {
         <div id="container" className="flex items-center justify-center">
           <main className="relative w-full max-w-[430px] h-screen">
             <Header />
-            <div className="w-full h-screen max-h-screen overflow-y-auto mx-auto bg-white pt-[60px]">
+            <div className="w-full h-screen max-h-screen overflow-y-auto mx-auto bg-white py-[60px]">
               <Component {...pageProps} />
             </div>
             <Navigation />
