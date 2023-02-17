@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useUser } from "@/contexts/userContext";
 import { io } from "socket.io-client";
 import { useRouter } from "next/router";
@@ -9,38 +9,16 @@ import {
   NeutralFace,
   AmbiguousFace,
 } from "@/components/icons/Emotions";
+import axios from "axios";
 
-const mockFriends = [
-  {
-    member_id: 1,
-    name: "김철수",
-    message: "안녕하세요",
-  },
-  {
-    member_id: 2,
-    name: "이영희",
-    message: "반갑습니다",
-  },
-  {
-    member_id: 3,
-    name: "박영수",
-    message: "호호",
-  },
-  {
-    member_id: 4,
-    name: "최영희",
-    message: "헤헤",
-  },
-];
-
-/* const getEmotion = () => {
+const getEmotion = () => {
   return [
-    <PositiveFace />,
-    <NegativeFace />,
-    <NeutralFace />,
-    <AmbiguousFace />,
+    <PositiveFace key={0} />,
+    <NegativeFace key={1} />,
+    <NeutralFace key={2} />,
+    <AmbiguousFace key={3} />,
   ][Math.floor(Math.random() * 4)];
-}; */
+};
 
 const socket = io("http://192.168.8.85:80");
 // export const socket = io("http://localhost:80");
@@ -54,6 +32,7 @@ export default function Chat() {
       setRooms(rooms);
     };
     const createRoomHandler = (newRoom) => {
+      console.log(newRoom);
       setRooms((prevRooms) => [...prevRooms, newRoom]);
     };
     socket.emit("room-list", userId, roomListHandler);
@@ -65,27 +44,42 @@ export default function Chat() {
   }, []);
   const onJoinRoom = (roomId) => () => {
     socket.emit("join-room", roomId, () => {
-      router.push(`/chat/${roomId}`);
+      router.push(`/chat/${roomId}?friendId=${roomId}`);
     });
   };
+
+  const [friend, setFriend] = useState(null);
+
+  const getFriendInfo = useCallback(async () => {
+    const result = await axios.get(
+      `${process.env.NEXT_PUBLIC_API_HOST}/member/4421`
+    );
+
+    if (result.status === 200) {
+      console.log(result.data);
+      setFriend(result.data);
+    }
+  }, []);
+
+  useEffect(() => {
+    getFriendInfo();
+  }, []);
+
   return (
     <div>
-      {rooms?.map((room) => (
+      {/* {rooms?.map((room) => (
         <RoomItem
           key={room.id}
           room={room}
           onClick={onJoinRoom(room.id)}
           userId={userId}
         />
-      ))}
-      {/* {mockFriends.map((room) => (
-        <RoomItem
-          key={room.member_id}
-          room={room}
-          onClick={onJoinRoom(room.member_id)}
-          emotion={getEmotion()}
-        />
       ))} */}
+      <RoomItem
+        onClick={onJoinRoom(friend?.id)}
+        emotion={getEmotion()}
+        friend={friend}
+      />
     </div>
   );
 }
