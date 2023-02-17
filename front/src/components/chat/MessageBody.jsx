@@ -4,8 +4,8 @@ import { useMemo } from "react";
 import Avatar from "../avatar/Avatar";
 import Message from "./Message";
 
-const MessageBody = ({ chats }) => {
-  const { userId } = useUser();
+const MessageBody = ({ chats, friendAvatar }) => {
+  const { user, userId } = useUser();
   const isMyself = (chat) =>
     chat.member_id == userId || chat.member_id == sampleUserId;
 
@@ -27,12 +27,7 @@ const MessageBody = ({ chats }) => {
                 >
                   <Avatar
                     width="64px"
-                    avatar={{
-                      skin: Math.floor(Math.random() * 4),
-                      eyes: Math.floor(Math.random() * 5),
-                      hair: Math.floor(Math.random() * 15),
-                      glasses: Math.floor(Math.random() * 4),
-                    }}
+                    avatar={isMyself(chat) ? user.avatar : friendAvatar}
                     emotion="positive"
                     style={{
                       transform: isMyself(chat) ? undefined : "rotateY(180deg)",

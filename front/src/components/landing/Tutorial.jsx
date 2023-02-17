@@ -386,7 +386,10 @@ const Tutorial = () => {
         className="h-full overflow-scroll relative px-6 py-2.5"
       >
         <div className="min-h-full flex flex-col justify-end pb-[60px]">
-          <MessageBody chats={chats} />
+          <MessageBody
+            chats={chats}
+            friendAvatar={{ skin: -1, eyes: 3, hair: 0, glasses: 0 }}
+          />
         </div>
       </div>
       {end ? (
