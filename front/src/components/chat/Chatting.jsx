@@ -26,10 +26,6 @@ const Chatting = () => {
       console.log(chat);
       setChats((prevChats) => [...prevChats, chat]);
     };
-    socket.emit("join-room", { room_id }, () => {});
-    socket.on("connection", function () {
-      console.log("client connected");
-    });
 
     socket.on("connect_error", function (err) {
       console.log("client connect_error: ", err);
