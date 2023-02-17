@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import cc from "classcat";
 import { emotionName } from "@/constants/emotion";
+import BadgeAndPercent from "./BadgeAndPercent";
 
 const dummy = [
   { name: "positive", count: 53 },
@@ -36,23 +37,11 @@ const BarChart = () => {
       </div>
       <div className="flex items-center justify-center">
         {sorted.map((item) => (
-          <div
-            className="flex flex-col items-center gap-1 w-20"
+          <BadgeAndPercent
             key={item.name}
-          >
-            <div
-              className={cc([
-                "badge py-0.5 px-2 text-sm",
-                item.name === "positive" && "badge-positive",
-                item.name === "negative" && "badge-negative",
-                item.name === "neutral" && "badge-neutral",
-                item.name === "ambiguous" && "badge-ambiguous",
-              ])}
-            >
-              {emotionName[item.name].kor}
-            </div>
-            <div className="font-extrabold">{item.count}%</div>
-          </div>
+            emotion={item.name}
+            percent={item.count}
+          />
         ))}
       </div>
     </div>
