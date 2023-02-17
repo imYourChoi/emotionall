@@ -1,3 +1,5 @@
+import { useEffect, useState } from "react";
+import { io } from "socket.io-client";
 import RoomItem from "@/components/chat/RoomItem";
 
 const mockFriends = [
@@ -23,11 +25,23 @@ const mockFriends = [
   },
 ];
 
+export const socket = io("http://localhost:80/chat");
 export default function Chat() {
+  const [rooms, setRooms] = useState([]);
+  useEffect(() => {
+    const roomListHandler = (rooms) => {
+      setRooms(rooms);
+    };
+    socket.emit("room-list", roomListHandler);
+
+    return () => {
+      socket.off("room-list", roomListHandler);
+    };
+  }, []);
   return (
     <div>
       {mockFriends.map((friend) => (
-        <RoomItem friend={friend} />
+        <RoomItem key={friend.id} friend={friend} />
       ))}
     </div>
   );
