@@ -21,7 +21,7 @@ const Navigation = () => {
         <Link
           href={page.path}
           key={page.text}
-          className="black-900 text-xs font-bold w-12 flex flex-col items-center gap-y-1"
+          className="text-black-900 text-xs font-bold w-12 flex flex-col items-center gap-y-1"
         >
           {page.icon({
             color: router.pathname === page.path ? mainEmotion : "disactive",
