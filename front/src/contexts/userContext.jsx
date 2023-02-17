@@ -19,14 +19,18 @@ const UserContextProvider = ({ children }) => {
       hair: 11,
       glasses: 0,
     },
-    badge: "positive-max",
+    badge: "",
   });
 
   useEffect(() => {
     const u = localStorage.getItem("userId");
     if (u) {
       setUserId(u);
-      // 서버에서 userId로 user 받아오기...
+    }
+
+    const us = localStorage.getItem("user");
+    if (us) {
+      setUser(JSON.parse(us));
     }
   }, []);
 

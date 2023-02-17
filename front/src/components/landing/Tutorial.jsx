@@ -334,6 +334,10 @@ const Tutorial = () => {
       setUserId(result.data);
       setUser({ message: usermessage, nickname, avatar, badge: "" });
       localStorage.setItem("userId", result.data);
+      localStorage.setItem(
+        "user",
+        JSON.stringify({ message: usermessage, nickname, avatar, badge: "" })
+      );
       router.push("/");
     }
   });
