@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import SearchItem from "./SearchItem";
 import { useUser } from "@/contexts/userContext";
 
-const socket = io("http://192.168.8.85:80/chat");
+const socket = io("http://192.168.8.85:80");
 
 export default function Search() {
   const enterPressed = useRef(false);
@@ -32,7 +32,7 @@ export default function Search() {
     }
     try {
       const response = await axios.get(
-        "http://192.168.8.13:8080/member/memberList"
+        `${process.env.NEXT_PUBLIC_API_HOST}/member/memberList`
       );
       if (response.status === 200) {
         setAllFriends(response.data);
@@ -47,6 +47,7 @@ export default function Search() {
   const onCreateRoom = useCallback((friend) => () => {
     socket.emit("create-room", [userId, friend.id], (response) => {
       // socket.emit("join-room", response.room_id, () => {
+      console.log(response);
       router.push(`/chat/${response.room_id}`);
       // });
     });

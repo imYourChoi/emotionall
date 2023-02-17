@@ -23,7 +23,6 @@ const Chatting = () => {
 
   useEffect(() => {
     const handleReceiveMessage = (chat) => {
-      console.log(chat);
       setChats((prevChats) => [...prevChats, chat]);
     };
 
@@ -55,7 +54,7 @@ const Chatting = () => {
           time: new Date().toISOString(),
         },
       },
-      (res) => console.log("Well emitted!", res.message.text)
+      (res) => console.log("Well emitted!", res.result)
     );
     setMessage("");
     setDisabled(true);
