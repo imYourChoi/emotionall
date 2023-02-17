@@ -168,10 +168,12 @@ const Report = () => {
               <div className="flex flex-col items-center px-2 py-2">
                 <Avatar
                   width={"32px"}
-                  avatar={{ skin: 1, eyes: 2, hair: 12, glasses: 0 }}
+                  avatar={{ skin: i, eyes: i + 1, hair: i + 6, glasses: 0 }}
                   emotion="positive"
                 />
-                <div className="text-sm font-semibold">채린이</div>
+                <div className="text-sm font-semibold">
+                  {["지헌", "김건"][i]}
+                </div>
                 <div className="badge badge-positive font-semibold text-sm py-0.5 px-2 mt-1">
                   파워긍정
                 </div>
@@ -186,12 +188,14 @@ const Report = () => {
               <div className="flex flex-col items-center px-2 py-2">
                 <Avatar
                   width={"32px"}
-                  avatar={{ skin: 1, eyes: 2, hair: 12, glasses: 0 }}
+                  avatar={{ skin: 1, eyes: 2, hair: 13 - i * 6, glasses: 0 }}
                   emotion="positive"
                 />
-                <div className="text-sm font-semibold">채린이</div>
-                <div className="badge badge-positive font-semibold text-sm py-0.5 px-2 mt-1">
-                  파워긍정
+                <div className="text-sm font-semibold">
+                  {["현채", "준희"][i]}
+                </div>
+                <div className="badge badge-ambiguous whitespace-nowrap font-semibold text-sm py-0.5 px-2 mt-1">
+                  투 머치 토커
                 </div>
               </div>
             ))}
@@ -202,8 +206,8 @@ const Report = () => {
       <div className="w-full bg-black-200 h-px my-4" />
       <div className="flex flex-col items-center">
         <div className="font-bold">
-          나는 <span className="font-black">채린이</span>
-          {checkTextEndsWithCoda("채린이") ? "과" : "와"} 대화할 때 가장
+          나는 <span className="font-black">지수</span>
+          {checkTextEndsWithCoda("지수") ? "과" : "와"} 대화할 때 가장
           긍정적이네요!
         </div>
         <div className="grid grid-cols-4 place-items-center px-8">

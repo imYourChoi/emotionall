@@ -29,7 +29,7 @@ const HomeList = () => {
     <div className="w-full px-4">
       <div className="w-full overflow-x-auto py-2">
         <div className="w-max flex gap-2 px-2">
-          {[...Array(12)].map((_, i) => (
+          {[...Array(6)].map((_, i) => (
             <Item key={i} />
           ))}
         </div>

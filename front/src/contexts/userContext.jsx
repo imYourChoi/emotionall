@@ -9,15 +9,15 @@ export const UserContext = createContext({
 const UserContextProvider = ({ children }) => {
   const [userId, setUserId] = useState(null);
   const [user, setUser] = useState({
-    nickname: "",
+    nickname: "우기",
     message: "",
     avatar: {
-      skin: 0,
-      eyes: 0,
-      hair: 0,
+      skin: 2,
+      eyes: 1,
+      hair: 11,
       glasses: 0,
     },
-    badge: "",
+    badge: "positive-max",
   });
 
   useEffect(() => {

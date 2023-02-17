@@ -8,19 +8,19 @@
   }
 
   .badge-positive {
-    @apply text-positive bg-positive-blend;
+    @apply !text-positive !bg-positive-blend border-none;
   }
 
   .badge-negative {
-    @apply text-negative bg-negative-blend;
+    @apply !text-negative !bg-negative-blend border-none;
   }
 
   .badge-neutral {
-    @apply text-neutral bg-neutral-blend;
+    @apply !text-neutral !bg-neutral-blend border-none;
   }
 
   .badge-ambiguous {
-    @apply text-ambiguous bg-ambiguous-blend;
+    @apply !text-ambiguous !bg-ambiguous-blend border-none;
   }
 
   .badge-none {
