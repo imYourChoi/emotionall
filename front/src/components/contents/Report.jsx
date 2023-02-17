@@ -6,6 +6,7 @@ import { badge } from "@/constants/badge";
 import BarChart from "./BarChart";
 import { checkTextEndsWithCoda } from "@/utils/texts";
 import BadgeAndPercent from "./BadgeAndPercent";
+import { InfoIcon } from "../icons/Icons";
 
 const Report = () => {
   const { user } = useUser();
@@ -36,6 +37,28 @@ const Report = () => {
       </div>
       <div className="py-4">
         <BarChart />
+
+        <div className="w-full bg-black-100 rounded-md px-4 py-2 text-sm mt-4 flex flex-col gap-1">
+          <div className="flex items-center gap-2">
+            <InfoIcon width="18px" className="fill-black-600" />
+            감정 분류에 대하여
+          </div>
+          <div>
+            감정은 다음과 같이 분류돼요. 긍정 - 좋음 / 부정 - 싫음, 슬픔, 두려움
+            / 중립 - 감정 없음, 불확실 / 모호 - 놀람, 지루함, 창피함
+          </div>
+        </div>
+
+        <div className="grid grid-cols-2">
+          <div>
+            <div className="flex items-center gap-2 font-bold">
+              <div className="w-8 h-8 rounded-full flex items-center justify-center badge-positive">
+                1
+              </div>
+              좋음
+            </div>
+          </div>
+        </div>
       </div>
 
       <div className="w-full bg-black-200 h-px my-4" />
