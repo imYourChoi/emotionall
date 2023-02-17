@@ -1,43 +1,60 @@
+import { sampleUserId } from "@/constants/etc";
+import { useUser } from "@/contexts/userContext";
 import { useMemo } from "react";
+import Avatar from "../avatar/Avatar";
 import Message from "./Message";
-import MessageSet from "./MessageSet";
 
 const MessageBody = ({ chats }) => {
-  const member_id = "my_id";
-  const memoizedChats = useMemo(() => {
-    const bundledChats = [];
-    let chatCache = null;
-    chats.forEach((chat, idx) => {
-      if (
-        chatCache &&
-        // chatCache[0].member_id !== chat.member_id
-        idx % 4 === 0
-      ) {
-        bundledChats.push(
-          <MessageSet
-            key={idx + new Date().toISOString().slice(11, 19)}
-            chats={chatCache}
-            member_id={member_id}
-          />
-        );
-        chatCache = null;
-      }
-      if (!chatCache) chatCache = [];
-      chatCache.push(chat);
-    });
-    if (chatCache) {
-      bundledChats.push(
-        <MessageSet
-          key={new Date().toISOString().slice(11, 19)}
-          chats={chatCache}
-          member_id={member_id}
-        />
-      );
-    }
-    return bundledChats;
-  }, [chats]);
+  const { userId } = useUser();
+  const isMyself = (chat) =>
+    chat.member_id === userId || chat.member_id === sampleUserId;
+
   return (
-    <div className="min-h-full flex flex-col justify-end">{memoizedChats}</div>
+    <div className="min-h-full flex flex-col justify-end">
+      {chats.map((chat, i) => {
+        return (
+          <div>
+            {(i == 0 || chats[i - 1].member_id != chat.member_id) &&
+              chats[i]?.type !==
+                "nomessage" /* || chats[i - 1].emotion != chat.emotion) */ && (
+                <div
+                  className="flex"
+                  style={{
+                    justifyContent: isMyself(chat) ? "flex-end" : "flex-start",
+                  }}
+                >
+                  <Avatar
+                    width="64px"
+                    avatar={{
+                      skin: Math.floor(Math.random() * 4),
+                      eyes: Math.floor(Math.random() * 5),
+                      hair: Math.floor(Math.random() * 15),
+                      glasses: Math.floor(Math.random() * 4),
+                    }}
+                    emotion="positive"
+                    style={{
+                      transform: isMyself(chat) ? "rotateY(180deg)" : undefined,
+                    }}
+                  />
+                </div>
+              )}
+            {chat.type === "nomessage" ? (
+              chat.item
+            ) : (
+              <Message
+                key={i}
+                chat={chat}
+                isMyself={isMyself(chat)}
+                isLast={
+                  i === chats.length - 1 ||
+                  chats[i + 1]?.member_id !== chat.member_id
+                }
+              />
+            )}
+          </div>
+        );
+      })}
+    </div>
   );
 };
 

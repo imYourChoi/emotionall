@@ -30,4 +30,8 @@
   .report-title {
     @apply text-lg font-bold;
   }
+
+  .tutorial-buttons {
+    @apply w-full flex flex-wrap animate-bubble origin-bottom-left;
+  }
 }
