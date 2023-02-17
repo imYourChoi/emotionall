@@ -33,7 +33,7 @@ const Chatting = () => {
 
   const handleSendMessage = useCallback(() => {
     socket.emit("message", {
-      user_id: "my_id",
+      member_id: "my_id",
       text: message,
       time: new Date().toISOString(),
     });

@@ -1,8 +1,8 @@
 import Message from "./Message";
 import Avatar from "../avatar/Avatar";
 
-const MessageSet = ({ chats, user_id }) => {
-  //   const isMyself = chats[0].user_id === user_id;
+const MessageSet = ({ chats, member_id }) => {
+  //   const isMyself = chats[0].member_id === member_id;
   const isMyself = Math.random() > 0.5;
   return (
     <div>
