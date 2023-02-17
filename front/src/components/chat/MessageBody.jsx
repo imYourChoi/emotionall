@@ -37,9 +37,7 @@ const MessageBody = ({ chats }) => {
     return bundledChats;
   }, [chats]);
   return (
-    <div className="min-h-full flex flex-col justify-end py-2.5">
-      {memoizedChats}
-    </div>
+    <div className="min-h-full flex flex-col justify-end">{memoizedChats}</div>
   );
 };
 
