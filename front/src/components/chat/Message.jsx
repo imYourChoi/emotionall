@@ -1,9 +1,7 @@
 const Message = ({ chat, isMyself, isLast }) => {
   const getRadius = () => {
-    if (!isLast) return " rounded-2xl";
-    return (
-      " rounded-t-2xl" + (isMyself ? " rounded-bl-2xl" : " rounded-br-2xl")
-    );
+    if (!isLast) return "16px";
+    return "16px 16px " + (isMyself ? "0 16px" : "16px 0");
   };
   const getColor = () => {
     return " bg-neutral-blend";
@@ -13,11 +11,8 @@ const Message = ({ chat, isMyself, isLast }) => {
       className={"w-full py-[4.5px] flex" + (isMyself ? " justify-end" : "")}
     >
       <div
-        className={
-          "w-fit px-[18px] py-2.5 text-base font-medium" +
-          getColor() +
-          getRadius()
-        }
+        className={"w-fit px-[18px] py-2.5 text-base font-medium" + getColor()}
+        style={{ borderRadius: getRadius() }}
       >
         {chat.text}
       </div>
