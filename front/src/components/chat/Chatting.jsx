@@ -1,9 +1,9 @@
 import { useRef, useState, useEffect, useCallback } from "react";
 import { useRouter } from "next/router";
 import { io } from "socket.io-client";
-import useTextAreaAutosize from "@/hooks/useTextareaAutosize";
 import MessageForm from "./MessageForm";
 import MessageBody from "./MessageBody";
+import useTextAreaAutosize from "@/hooks/useTextareaAutosize";
 import { useUser } from "@/contexts/userContext";
 
 const socket = io("http://192.168.8.85:80");
