@@ -39,7 +39,19 @@ a {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(0, 0, 0, 0.2);
+  background: transparent;
+  border-radius: 4px;
+}
+
+@media (min-width: 430px) {
+  ::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+  }
+}
+
+.no-scrollbar::-webkit-scrollbar-thumb {
+  background: transparent;
   border-radius: 4px;
 }
 
