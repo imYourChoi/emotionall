@@ -23,7 +23,7 @@ const Header = () => {
             </button>
           )}
           {hasBackButton ? (
-            <div className="font-bold text-sm">{id}</div>
+            <div className="font-bold text-sm">지헌</div>
           ) : (
             <LogoIcon width={"100px"} />
           )}
