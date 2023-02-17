@@ -6,7 +6,7 @@ import MessageForm from "./MessageForm";
 import MessageBody from "./MessageBody";
 import { useUser } from "@/contexts/userContext";
 
-const socket = io("http://192.168.8.85:80/chat");
+const socket = io("http://192.168.8.85:80");
 // const socket = io("http://localhost:80");
 
 const Chatting = () => {
@@ -26,8 +26,11 @@ const Chatting = () => {
       console.log(chat);
       setChats((prevChats) => [...prevChats, chat]);
     };
-    socket.emit("join-room", { room_id }, () => {});
-    socket.on("message", function (chat) {
+
+    socket.on("connect_error", function (err) {
+      console.log("client connect_error: ", err);
+    });
+    socket.on("message", (chat) => {
       console.log(chat);
       setChats((prevChats) => [...prevChats, chat.message]);
     });
