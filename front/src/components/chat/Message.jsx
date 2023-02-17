@@ -12,7 +12,10 @@ const Message = ({ chat, isMyself, isLast }) => {
       style={{ justifyContent: isMyself ? "flex-end" : "flex-start" }}
     >
       <div
-        className={"w-fit px-[18px] py-2.5 text-base font-medium" + getColor()}
+        className={
+          "w-fit max-w-[calc(100%-80px)] px-[18px] py-2.5 text-base font-medium break-words" +
+          getColor()
+        }
         style={{ borderRadius: getRadius() }}
       >
         {chat.text}

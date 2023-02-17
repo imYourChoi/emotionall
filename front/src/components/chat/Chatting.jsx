@@ -59,7 +59,7 @@ const Chatting = () => {
     <>
       <div
         ref={messageBodyRef}
-        className="h-full overflow-scroll relative px-6 "
+        className="h-full overflow-scroll relative px-6 py-2.5"
       >
         <MessageBody chats={chats} />
       </div>
