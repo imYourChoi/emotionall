@@ -40,6 +40,7 @@ const HomeList = () => {
       setFriends(result.data);
     }
   }, []);
+
   useEffect(() => {
     getFriends();
   }, []);
@@ -51,7 +52,7 @@ const HomeList = () => {
       <div className="w-full overflow-x-auto py-2">
         <div className="w-max flex gap-2 px-2">
           {friends
-            .filter((item) => item.id !== userId)
+            .filter((item) => item.id != userId)
             .map((item, i) => (
               <Item key={i} item={item} />
             ))}
