@@ -9,6 +9,7 @@ import UserContextProvider from "@/contexts/userContext";
 
 export default function App({ Component, pageProps }) {
   const router = useRouter();
+
   useEffect(() => {
     if (
       ![
@@ -25,6 +26,7 @@ export default function App({ Component, pageProps }) {
       router.replace("/");
     }
   });
+
   return (
     <UserContextProvider>
       <EmotionContextProvider>

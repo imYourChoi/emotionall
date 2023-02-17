@@ -1,7 +1,10 @@
 import { forwardRef, useRef } from "react";
 
 const MessageForm = forwardRef(
-  ({ message, disabled, setDisabled, handleSendMessage, setMessage }, ref) => {
+  (
+    { message, disabled, setDisabled, handleSendMessage, setMessage, locked },
+    ref
+  ) => {
     const enterPressed = useRef(false);
     const shiftPressed = useRef(false);
     const onKeyDown = (e) => {
@@ -23,6 +26,9 @@ const MessageForm = forwardRef(
     };
     return (
       <div className="fixed max-w-[430px] w-full mx-auto inset-x-0 bottom-0 bg-white z-10 px-4 py-[7px] flex gap-x-2.5 items-center">
+        {locked && (
+          <div className="absolute inset-0 bg-black-900 bg-opacity-20"></div>
+        )}
         <textarea
           ref={ref}
           value={message}
