@@ -3,8 +3,8 @@ import { PositiveFace } from "../icons/Emotions";
 
 const Item = () => {
   return (
-    <div className="flex flex-col items-center relative gap-1">
-      <div className="w-12 h-12 relative rounded-full overflow-hidden bg-black-200">
+    <div className="flex flex-col items-center relative">
+      <div className="w-12 h-12 relative">
         <Avatar
           width="48px"
           avatar={{
