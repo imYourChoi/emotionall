@@ -44,13 +44,13 @@ export default function Chat() {
       socket.off("create-room", createRoomHandler);
     };
   }, []);
-  const onCreateRoom = useCallback(() => {
-    socket.emit("create-room", roomId, (response) => {
+  const onCreateRoom = useCallback((nickname) => () => {
+    socket.emit("create-room", ["me", nickname], (response) => {
       router.push(`/chat/${response.roomId}`);
     });
   });
   const onJoinRoom = useCallback((roomId) => () => {
-    router.push(`/chat/${roomId}`);
+    router.push(`/chat/${roomId}`); // 임시로 만들어둠
     socket.emit("join-room", () => {
       router.push(`/chat/${roomId}`);
     });
