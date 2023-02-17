@@ -6,10 +6,9 @@ import "@/styles/globals.css";
 
 export default function App({ Component, pageProps }) {
   const router = useRouter();
-  console.log(router);
   useEffect(() => {
     if (
-      !["/", "/rooms", "/chat/[id]", "/contents", "/settings"].includes(
+      !["/", "/chat", "/chat/[id]", "/contents", "/settings"].includes(
         router.pathname
       )
     ) {

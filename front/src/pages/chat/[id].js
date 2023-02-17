@@ -1,7 +1,7 @@
 import Head from "next/head";
 import Chatting from "@/components/chat/Chatting";
 
-export default function Chat() {
+export default function Chatting() {
   return (
     <>
       <Head>

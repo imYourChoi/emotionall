@@ -3,7 +3,7 @@ import Link from "next/link";
 
 const pages = [
   { path: "/", text: "홈" },
-  { path: "/rooms", text: "채팅방" },
+  { path: "/chat", text: "채팅방" },
   { path: "/contents", text: "콘텐츠" },
   { path: "/settings", text: "설정" },
 ];
