@@ -18,7 +18,7 @@ const Chatting = () => {
 
   useEffect(() => {
     const handleReceiveMessage = (chat) => {
-      setChats((prevChats) => [...prevChats, chat.data]);
+      setChats((prevChats) => [...prevChats, chat]);
     };
 
     socket.on("message", handleReceiveMessage);
@@ -28,25 +28,30 @@ const Chatting = () => {
   }, []);
 
   useEffect(() => {
-    scrollToBottom(true);
+    scrollToBottom(false);
   }, [chats.length]);
 
   const handleSendMessage = useCallback(() => {
-    socket.emit("message", { data: message });
+    socket.emit("message", {
+      user_id: "my_id",
+      text: message,
+      time: new Date().toISOString(),
+    });
     setMessage("");
+    setDisabled(true);
   });
 
   const scrollToBottom = (doAnimation = false) => {
-    if (messageBodyRef.current) {
-      const scrollTop = messageBodyRef.current.scrollHeight;
-      if (doAnimation) {
-        messageBodyRef.current.scroll({
-          behavior: "smooth",
-          top: scrollTop,
-        });
-      } else {
-        messageBodyRef.current.scrollTop = scrollTop;
-      }
+    if (!messageBodyRef.current) return;
+
+    const scrollTop = messageBodyRef.current.scrollHeight;
+    if (doAnimation) {
+      messageBodyRef.current.scroll({
+        behavior: "smooth",
+        top: scrollTop,
+      });
+    } else {
+      messageBodyRef.current.scrollTop = scrollTop;
     }
   };
 
@@ -56,11 +61,7 @@ const Chatting = () => {
         ref={messageBodyRef}
         className="h-full overflow-scroll relative px-6 "
       >
-        <div className="min-h-full flex flex-col justify-end py-2.5">
-          {chats?.map((chat, idx) => (
-            <MessageBody key={idx} message={chat} />
-          ))}
-        </div>
+        <MessageBody chats={chats} />
       </div>
       <MessageForm
         ref={textAreaRef}
