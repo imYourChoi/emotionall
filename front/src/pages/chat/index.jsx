@@ -26,6 +26,7 @@ const mockFriends = [
   },
 ];
 
+// const socket = io("http://192.168.8.85:80/chat");
 export const socket = io("http://localhost:80");
 
 export default function Chat() {
@@ -46,7 +47,7 @@ export default function Chat() {
   }, []);
   const onCreateRoom = useCallback((nickname) => () => {
     socket.emit("create-room", ["me", nickname], (response) => {
-      router.push(`/chat/${response.roomId}`);
+      // router.push(`/chat/${response.roomId}`);
     });
   });
   const onJoinRoom = useCallback((roomId) => () => {
@@ -64,6 +65,7 @@ export default function Chat() {
           onClick={onJoinRoom(friend.id)}
         />
       ))}
+      <div onClick={onCreateRoom("Anybody")}>let's create room</div>
     </div>
   );
 }
