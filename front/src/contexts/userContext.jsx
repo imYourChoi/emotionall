@@ -4,6 +4,8 @@ import { createContext, useContext, useEffect, useState } from "react";
 export const UserContext = createContext({
   mainUser: null,
   setUser: () => {},
+  userId: null,
+  setUserId: () => {},
 });
 
 const UserContextProvider = ({ children }) => {

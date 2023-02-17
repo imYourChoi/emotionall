@@ -3,6 +3,7 @@ import { io } from "socket.io-client";
 import axios from "axios";
 import { useRouter } from "next/router";
 import SearchItem from "./SearchItem";
+import { useUser } from "@/contexts/userContext";
 
 const socket = io("http://192.168.8.85:80/chat");
 
@@ -13,6 +14,7 @@ export default function Search() {
   const [friends, setFriends] = useState([]);
   const [name, setName] = useState("");
   const [disabled, setDisabled] = useState(true);
+  const { userId } = useUser();
 
   const handleChangeName = (evt) => {
     if (enterPressed.current) {
@@ -43,7 +45,7 @@ export default function Search() {
     }
   };
   const onCreateRoom = useCallback((friend) => () => {
-    socket.emit("create-room", [4008, friend.id], (response) => {
+    socket.emit("create-room", [userId, friend.id], (response) => {
       // socket.emit("join-room", response.room_id, () => {
       router.push(`/chat/${response.room_id}`);
       // });
