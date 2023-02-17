@@ -8,10 +8,10 @@ const SearchItem = ({ friend, onClick = () => {} }) => {
         <Avatar
           width="48px"
           avatar={{
-            skin: Math.floor(Math.random() * 4),
-            eyes: Math.floor(Math.random() * 5),
-            hair: Math.floor(Math.random() * 15),
-            glasses: Math.floor(Math.random() * 4),
+            skin: friend?.avatar_skin_id,
+            eyes: friend?.avatar_eyes_id,
+            glasses: friend?.avatar_glasses_id,
+            hair: friend?.avatar_hair_id,
           }}
           emotion="positive"
           style={{ flex: "0 0 48px" }}
