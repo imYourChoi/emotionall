@@ -10,6 +10,17 @@ module.exports = {
       xl: ["24px", "29px"],
     },
     extend: {
+      keyframes: {
+        bubble: {
+          from: {
+            scale: 0,
+          },
+          to: { scale: 1 },
+        },
+      },
+      animation: {
+        bubble: "bubble 0.2s ease",
+      },
       colors: {
         positive: "#2998FF",
         "positive-blend": "#D3EAFF",

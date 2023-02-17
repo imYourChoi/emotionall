@@ -22,14 +22,18 @@ const MessageSet = ({ chats, member_id }) => {
           style={{ transform: !isMyself ? "rotateY(180deg)" : undefined }}
         />
       </div>
-      {chats?.map((chat, idx) => (
-        <Message
-          key={idx}
-          chat={chat}
-          isMyself={isMyself}
-          isLast={idx === chats.length - 1}
-        />
-      ))}
+      {chats?.map((chat, idx) =>
+        chat.type === "nomessage" ? (
+          chat.item
+        ) : (
+          <Message
+            key={idx}
+            chat={chat}
+            isMyself={isMyself}
+            isLast={idx === chats.length - 1}
+          />
+        )
+      )}
     </div>
   );
 };
