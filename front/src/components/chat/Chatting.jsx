@@ -49,11 +49,7 @@ const Chatting = () => {
       setChats((prevChats) => [...prevChats, chat]);
     };
 
-    socket.on("connect_error", function (err) {
-      console.log("client connect_error: ", err);
-    });
     socket.on("message", (chat) => {
-      console.log(chat);
       setChats((prevChats) => [...prevChats, chat.message]);
     });
     return () => {
@@ -77,7 +73,7 @@ const Chatting = () => {
           time: new Date().toISOString(),
         },
       },
-      (res) => console.log("Well emitted!", res.message?.text)
+      (res) => console.log(res)
     );
     setMessage("");
     setDisabled(true);

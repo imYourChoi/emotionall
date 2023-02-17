@@ -44,13 +44,16 @@ export default function Search() {
       console.log(error);
     }
   };
-  const onCreateRoom = useCallback((friend) => {
-    socket.emit("create-room", [userId, friend.id], (response) => {
-      // socket.emit("join-room", response.room_id, () => {
-      console.log(response);
-      router.push(`/chat/${response.room_id}`);
-      // });
-    });
+  const onCreateRoom = useCallback((friend) => () => {
+    socket.emit(
+      "create-room",
+      { me: parseInt(userId), other: friend.id },
+      (response) => {
+        // socket.emit("join-room", response.room_id, () => {
+        router.push(`/chat/${response.room_id}`);
+        // });
+      }
+    );
   });
   const onKeyDown = (e) => {
     if (e.keyCode === 13) enterPressed.current = true;

@@ -16,3 +16,15 @@ export const emotionClass = {
   bored: { kor: "지루함", class: "ambiguous" },
   shame: { kor: "창피함", class: "ambiguous" },
 };
+
+export const emotionClassKorean = {
+  감정없음: "neutral",
+  놀람: "positive",
+  두려움: "negative",
+  불확실: "neutral",
+  슬픔: "negative",
+  싫음: "negative",
+  좋음: "positive",
+  지루함: "ambiguous",
+  창피함: "ambiguous",
+};
