@@ -2,9 +2,17 @@ import { useUser } from "@/contexts/userContext";
 import axios from "axios";
 import { useCallback, useEffect, useState } from "react";
 import Avatar from "../avatar/Avatar";
-import { PositiveFace } from "../icons/Emotions";
+import {
+  AmbiguousFace,
+  NegativeFace,
+  NeutralFace,
+  PositiveFace,
+} from "../icons/Emotions";
 
 const Item = ({ item }) => {
+  const emotion = ["positive", "negative", "neutral", "ambiguous"][
+    Math.floor(Math.random() * 4)
+  ];
   return (
     <div className="flex flex-col items-center relative">
       <div className="w-16 h-16 relative">
@@ -16,12 +24,15 @@ const Item = ({ item }) => {
             hair: item?.avatar_hair_id,
             glasses: item?.avatar_glasses_id,
           }}
-          emotion="positive"
+          emotion={emotion}
         />
       </div>
       <div className="font-medium text-sm">{item?.name}</div>
       <div className="absolute top-0 right-0">
-        <PositiveFace />
+        {emotion === "potitive" && <PositiveFace />}
+        {emotion === "negative" && <NegativeFace />}
+        {emotion === "neutral" && <NeutralFace />}
+        {emotion === "ambiguous" && <AmbiguousFace />}
       </div>
     </div>
   );
